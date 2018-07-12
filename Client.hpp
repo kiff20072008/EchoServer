@@ -1,38 +1,26 @@
 #ifndef _CLIENT_HPP_
 #define _CLIENT_HPP_
+
 #include <string>
-struct sockaddr_in;
-enum whatCon
-{
-	UDP_,
-	TCP_
-};
 
 
 class Client
 {
 public:
-	Client(whatCon con);
-	~Client();
-	void setDataUDP(std::string host, int port);
-	void setDataTCP(std::string ip, int port);
+	Client();
+	virtual ~Client();
 	void run();
-private:
-	virtual void create();
-	virtual void close_socket();
-	void echo();
+	void setPort(int port );
+	virtual void setData(std::string data) = 0;
+protected:
+	virtual void create()=0;
+	virtual void echo() = 0;
+	virtual std::string getServerType() = 0;
 
-	struct sockaddr_in *stSockAddr;
-	int i32Res;
-	int i32SocketFD;
-	std::string ip_;
-
-	whatCon con_;
+	int rcount_;
 	int port_;
 
-	std::string host_;
-	int server_;
-	int buflen_;
+	int server_,client_;
 	char* buf_;
 	
 };

@@ -2,8 +2,8 @@
 
 CXX=			g++ $(CXXFLAGS)
 
-ECHO-SERVER=		Server.o ServerMain.o NumbersParser.o
-ECHO-CLIENT=		Client.o ClientMain.o NumbersParser.o
+ECHO-SERVER=		Server.o ServerMain.o NumbersParser.o TCPServer.o UDPServer.o
+ECHO-CLIENT=		Client.o ClientMain.o TCPClient.o UDPClient.o
 OBJS =			$(ECHO-SERVER) $(ECHO-CLIENT)
 
 
@@ -14,11 +14,11 @@ all:	server client
 server:$(ECHO-SERVER)
 	$(CXX) -o server $(ECHO-SERVER) 
 
-client:$(ECHO-CLIENT)
+client:$(ECHO-CLIENT) 
 	$(CXX) -o client $(ECHO-CLIENT) 
 
 clean:
-	rm -f $(OBJS) $(OBJS:.o=.d)
+	rm -f $(OBJS) $(OBJS:.o=.d) 
 
 realclean:
 	rm -f $(OBJS) $(OBJS:.o=.d) server client

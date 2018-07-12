@@ -10,22 +10,22 @@ public:
 	virtual ~Server();
 	void setPort(int port);
 protected:
-	virtual void create()=0;
+	virtual void create();
 	void serve();
 	void handle();
 	void printNumbers();	
-	void sendNumToParser();
-	virtual std::string getServerType() = 0;
-	virtual bool getAccept() = 0;
-	virtual int readStr() = 0;
-	virtual int sendStr() = 0;
+	void sendNumToParser(unsigned int size);
+	virtual std::string getServerType();
+	virtual bool getAccept() ;
+	virtual int readStr() ;
+	virtual int sendStr() ;
 
 
-	NumbersParser parser_;
+	NumbersParser* parser_;
 	int port_;
 	int server_,client_;
 	char* buf_;
-	int rcount_;
+	int rcount;
 };
 
 #endif // !_SERVER_HPP_
